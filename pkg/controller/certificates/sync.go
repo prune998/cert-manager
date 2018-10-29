@@ -419,6 +419,11 @@ func (c *Controller) updateSecret(ctx context.Context, crt *v1alpha1.Certificate
 	secret.Data[corev1.TLSPrivateKeyKey] = key
 	secret.Data[TLSCAKey] = ca
 
+	// set Labels based on Certificate request
+	for key, val := range crt.Spec.Labels {
+		secret.Labels[key] = val
+	}
+
 	// if it is a new resource
 	if secret.SelfLink == "" {
 		enableOwner := c.CertificateOptions.EnableOwnerRef

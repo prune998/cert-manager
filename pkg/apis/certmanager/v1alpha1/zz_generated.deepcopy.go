@@ -651,6 +651,13 @@ func (in *CertificateSpec) DeepCopyInto(out *CertificateSpec) {
 		*out = new(ACMECertificateConfig)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.Labels != nil {
+		in, out := &in.Labels, &out.Labels
+		*out = make(map[string]string, len(*in))
+		for key, val := range *in {
+			(*out)[key] = val
+		}
+	}
 	return
 }
 

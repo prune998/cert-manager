@@ -118,6 +118,9 @@ type CertificateSpec struct {
 	// +kubebuilder:validation:Enum=rsa,ecdsa
 	// +optional
 	KeyAlgorithm KeyAlgorithm `json:"keyAlgorithm,omitempty"`
+
+	// Labels is a list of labels to be added to the secret SecretName
+	Labels map[string]string `json:"labels,omitempty"`
 }
 
 // ACMECertificateConfig contains the configuration for the ACME certificate provider
